@@ -1,0 +1,54 @@
+{
+  "budgets": [
+    {
+      "id": 1,
+      "name": "Incomes",
+      "average": 1666.66
+    },
+    {
+      "id": 2,
+      "name": "Home",
+      "average": -1517
+    },
+    {
+      "id": 3,
+      "name": "Auto & Transport",
+      "average": 0
+    },
+    {
+      "id": 4,
+      "name": "Food & Dining",
+      "average": 0
+    },
+    {
+      "id": 5,
+      "name": "Bank",
+      "average": 0
+    },
+    {
+      "id": 6,
+      "name": "Taxes",
+      "average": 0
+    },
+    {
+      "id": 7,
+      "name": "Shopping",
+      "average": 0
+    },
+    {
+      "id": 8,
+      "name": "Bills",
+      "average": 0
+    },
+    {
+      "id": 9,
+      "name": "Entertainment",
+      "average": 0
+    },
+    {
+      "id": 10,
+      "name": "Health",
+      "average": 0
+    }
+  ]
+}

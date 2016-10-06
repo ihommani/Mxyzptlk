@@ -1,0 +1,54 @@
+{
+  "summary": [
+    {
+      "id": 1,
+      "name": "Incomes",
+      "total": 29
+    },
+    {
+      "id": 2,
+      "name": "Home",
+      "total": -1706.16
+    },
+    {
+      "id": 3,
+      "name": "Auto & Transport",
+      "total": -155.22
+    },
+    {
+      "id": 4,
+      "name": "Food & Dining",
+      "total": -109.78
+    },
+    {
+      "id": 5,
+      "name": "Bank",
+      "total": -22.5
+    },
+    {
+      "id": 6,
+      "name": "Taxes",
+      "total": -317
+    },
+    {
+      "id": 7,
+      "name": "Shopping",
+      "total": -45.94
+    },
+    {
+      "id": 8,
+      "name": "Bills",
+      "total": -44.39
+    },
+    {
+      "id": 9,
+      "name": "Entertainment",
+      "total": -43.88
+    },
+    {
+      "id": 10,
+      "name": "Health",
+      "total": -12.93
+    }
+  ]
+}
