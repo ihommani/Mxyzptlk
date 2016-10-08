@@ -4,6 +4,7 @@ import model.BankInOutput;
 import model.BankInput;
 import model.Category;
 import model.Transaction;
+import util.InputValidator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +16,6 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Level1 {
@@ -60,16 +60,9 @@ public class Level1 {
     public static void main(String[] args) throws IOException {
 
         // basic verifications
-        if (args.length < 1 || args.length > 2) {
-            throw new IllegalStateException("Usage: Level1 [path_input.json] [path_output_file.json]");
-        }
+        InputValidator.validate(args);
 
-        Objects.requireNonNull(args[0], "The argument must be non null");
         Path inputPath = Paths.get(args[0]);
-
-        if (Files.isDirectory(inputPath) || !Files.isReadable(inputPath)) {
-            throw new IllegalStateException("Bad file path provided: " + args[0]);
-        }
 
         // deserializer
         Gson gson = new GsonBuilder()
