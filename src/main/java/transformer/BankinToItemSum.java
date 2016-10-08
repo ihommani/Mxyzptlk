@@ -1,7 +1,7 @@
 package transformer;
 
 import model.BankInOutput;
-import model.Transaction;
+import model.BankInput;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -23,14 +23,14 @@ public class BankinToItemSum {
         this.month = month;
     }
 
-    public List<BankInOutput.SumItem> transform(Map<Integer, String> categoryNameById, List<Transaction> transactions) {
+    public List<BankInOutput.SumItem> transform(Map<Integer, String> categoryNameById, List<BankInput.Transaction> transactions) {
         return bankInputToBankIn.apply(categoryNameById, transactions);
     }
 
-    class BankInputToBankIn implements BiFunction<Map<Integer, String>, List<Transaction>, List<BankInOutput.SumItem>> {
+    class BankInputToBankIn implements BiFunction<Map<Integer, String>, List<BankInput.Transaction>, List<BankInOutput.SumItem>> {
 
         @Override
-        public List<BankInOutput.SumItem> apply(Map<Integer, String> categoryNameById, List<Transaction> transactions) {
+        public List<BankInOutput.SumItem> apply(Map<Integer, String> categoryNameById, List<BankInput.Transaction> transactions) {
             return categoryNameById.entrySet().stream()
                     .map(entry -> {
                         double spendingOnCategory = transactions.stream()
@@ -40,7 +40,7 @@ public class BankinToItemSum {
                                 })
                                 .filter(transaction -> LocalDate.parse(transaction.getDate()).getMonth().getValue() == 6)
                                 .filter(transaction -> entry.getKey().equals(transaction.getCategory_id()))
-                                .mapToDouble(Transaction::getAmount)
+                                .mapToDouble(BankInput.Transaction::getAmount)
                                 .sum();
                         return new BankInOutput.SumItem(entry.getKey(), entry.getValue(), spendingOnCategory);
                     })

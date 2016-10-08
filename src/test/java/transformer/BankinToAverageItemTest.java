@@ -3,7 +3,6 @@ package transformer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.BankInput;
-import model.Category;
 import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
@@ -33,7 +32,7 @@ public class BankinToAverageItemTest {
         BankInput bankInput = gson.fromJson(bf, BankInput.class);
 
         // when
-        Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
+        Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(BankInput.Category::getId, BankInput.Category::getName));
         underTest.transform(categoryNameById, bankInput.getTransactions());
 
         // then

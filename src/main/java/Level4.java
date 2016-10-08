@@ -1,3 +1,19 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import model.BankInOutput;
+import model.BankInput;
+import transformer.BankinToItemAverage;
+import util.InputValidator;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.Month;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class Level4 {
 
     /**
@@ -45,8 +61,27 @@ public class Level4 {
      *
      * OBJECTIVE
      * ---------
-     * Write the code that prints the estimated amount of account (id = 1) from input.json
+     * Write the code that prints the estimated amount of account (id = 1) from input.json //TODO :the estimated balance of the account
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        // basic verifications
+        InputValidator.validate(args);
+
+        Path inputPath = Paths.get(args[0]);
+
+        Gson gson = new GsonBuilder()
+                .disableHtmlEscaping()
+                .setPrettyPrinting()
+                .create();
+
+        Path outputPath = args.length == 2 ? Paths.get(args[1]) : Paths.get(Level1.class.getClassLoader().getResource("").getPath()).resolve("outputLevel3.json");
+        try (BufferedReader bf = Files.newBufferedReader(inputPath)) {
+            BankInput bankInput = gson.fromJson(bf, BankInput.class);
+            Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(BankInput.Category::getId, BankInput.Category::getName));
+            BankInOutput src = new BankInOutput(new BankinToItemAverage(Month.JUNE).transform(categoryNameById, bankInput.getTransactions()));
+            System.out.println("Amount of account (id=1): " + outputPath);
+        }
+
     }
 }

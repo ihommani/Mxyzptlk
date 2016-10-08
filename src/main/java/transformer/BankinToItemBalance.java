@@ -13,14 +13,18 @@ import java.util.stream.Collectors;
 /**
  * Created on 08/10/16.<br/>
  */
-public class BankinToItemAverage {
+public class BankinToItemBalance {
 
     private final Month month;
 
-    private final BankinToItemAverage.BankInputToBankIn bankInputToBankIn = new BankinToItemAverage.BankInputToBankIn();
+    private final BankInput.Account account;
 
-    public BankinToItemAverage(Month month) {
+
+    private final BankinToItemBalance.BankInputToBankIn bankInputToBankIn = new BankinToItemBalance.BankInputToBankIn();
+
+    public BankinToItemBalance(Month month, BankInput.Account account) {
         this.month = month;
+        this.account = account;
     }
 
     public List<BankInOutput.AverageItem> transform(Map<Integer, String> categoryNameById, List<BankInput.Transaction> transactions) {
@@ -40,6 +44,7 @@ public class BankinToItemAverage {
                                     return transaction;
                                 })
                                 .filter(transaction -> entry.getKey().equals(transaction.getCategory_id()))
+                                .filter(transaction -> transaction.getAccount_id() == 1)
                                 .filter(transaction -> {
                                     LocalDate transactionDate = LocalDate.parse(transaction.getDate());
                                     return transactionDate.isBefore(LocalDate.of(transactionDate.getYear(), month, transactionDate.getDayOfMonth()));

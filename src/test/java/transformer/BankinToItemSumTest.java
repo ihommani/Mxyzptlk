@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.BankInOutput;
 import model.BankInput;
-import model.Category;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
@@ -37,7 +36,7 @@ public class BankinToItemSumTest {
         BufferedReader bf = Files.newBufferedReader(Paths.get(BankinToItemSum.class.getClassLoader().getResource("transformer/input.json").getPath()));
         BankInput bankInput = gson.fromJson(bf, BankInput.class);
 
-        Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
+        Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(BankInput.Category::getId, BankInput.Category::getName));
 
         // when
         List<BankInOutput.SumItem> sumItems = underTest.transform(categoryNameById, bankInput.getTransactions());
@@ -57,7 +56,7 @@ public class BankinToItemSumTest {
         BufferedReader bf = Files.newBufferedReader(Paths.get(BankinToItemSum.class.getClassLoader().getResource("transformer/inputlevel2.json").getPath()));
         BankInput bankInput = gson.fromJson(bf, BankInput.class);
 
-        Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
+        Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(BankInput.Category::getId, BankInput.Category::getName));
 
         // when
         List<BankInOutput.SumItem> sumItems = underTest.transform(categoryNameById, bankInput.getTransactions());

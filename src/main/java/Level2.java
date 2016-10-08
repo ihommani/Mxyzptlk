@@ -2,7 +2,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.BankInOutput;
 import model.BankInput;
-import model.Category;
 import transformer.BankinToItemSum;
 import util.InputValidator;
 
@@ -79,7 +78,7 @@ public class Level2 {
         try (BufferedReader bf = Files.newBufferedReader(inputPath);
              BufferedWriter bw = Files.newBufferedWriter(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
             BankInput bankInput = gson.fromJson(bf, BankInput.class);
-            Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
+            Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(BankInput.Category::getId, BankInput.Category::getName));
             BankInOutput src = new BankInOutput(new BankinToItemSum(Month.JUNE).transform(categoryNameById, bankInput.getTransactions()));
             String output = gson.toJson(src);
             bw.write(output);
