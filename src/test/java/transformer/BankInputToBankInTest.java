@@ -48,4 +48,24 @@ public class BankInputToBankInTest {
         Assertions.assertThat(items.get(0).getTotal()).isEqualTo(29.0);
 
     }
+
+    @Test
+    public void should_transform_bankinput2_into_bakin_data_model() throws IOException {
+
+        // given
+        BufferedReader bf = Files.newBufferedReader(Paths.get(BankInputToBankIn.class.getClassLoader().getResource("transformer/inputlevel2.json").getPath()));
+        BankInput bankInput = gson.fromJson(bf, BankInput.class);
+
+        Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
+
+        // when
+        List<BankInOutput.Item> items = underTest.apply(categoryNameById, bankInput.getTransactions());
+
+        // then
+        Assertions.assertThat(items).hasSize(10);
+        Assertions.assertThat(items.get(1).getId()).isEqualTo(2);
+        Assertions.assertThat(items.get(1).getName()).isEqualTo("Home");
+        Assertions.assertThat(items.get(1).getTotal()).isEqualTo(-1706.16);
+
+    }
 }

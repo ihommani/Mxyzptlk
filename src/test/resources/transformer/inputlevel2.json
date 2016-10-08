@@ -1,0 +1,286 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Incomes"
+    },
+    {
+      "id": 2,
+      "name": "Home"
+    },
+    {
+      "id": 3,
+      "name": "Auto & Transport"
+    },
+    {
+      "id": 4,
+      "name": "Food & Dining"
+    },
+    {
+      "id": 5,
+      "name": "Bank"
+    },
+    {
+      "id": 6,
+      "name": "Taxes"
+    },
+    {
+      "id": 7,
+      "name": "Shopping"
+    },
+    {
+      "id": 8,
+      "name": "Bills"
+    },
+    {
+      "id": 9,
+      "name": "Entertainment"
+    },
+    {
+      "id": 10,
+      "name": "Health"
+    }
+  ],
+  "transactions":[
+    {
+      "id": 1,
+      "description": "Virement SEPA salaire juin 2016",
+      "category_id": 1,
+      "date": "2016-05-26",
+      "move_to_month": 1,
+      "amount": 2000
+    },
+    {
+      "id": 2,
+      "description": "Remboursement SNCF",
+      "category_id": 1,
+      "date": "2016-06-04",
+      "move_to_month": 0,
+      "amount": 20
+    },
+    {
+      "id": 3,
+      "description": "Interets Livret Developpement durable",
+      "category_id": 1,
+      "date": "2016-06-12",
+      "move_to_month": 0,
+      "amount": 9
+    },
+    {
+      "id": 4,
+      "description": "Loyer appartement Paris",
+      "category_id": 2,
+      "date": "2016-06-06",
+      "move_to_month": 0,
+      "amount": -1512
+    },
+    {
+      "id": 5,
+      "description": "Prlv Spea Engie",
+      "category_id": 2,
+      "date": "2016-06-04",
+      "move_to_month": 0,
+      "amount": -172.80
+    },
+    {
+      "id": 6,
+      "description": "Ass habitation GMF",
+      "category_id": 2,
+      "date": "2016-06-10",
+      "move_to_month": 0,
+      "amount": -21.36
+    },
+    {
+      "id": 7,
+      "description": "CB Captain Train",
+      "category_id": 3,
+      "date": "2016-06-24",
+      "move_to_month": 0,
+      "amount": -19
+    },
+    {
+      "id": 8,
+      "description": "CB Captain Train",
+      "category_id": 3,
+      "date": "2016-06-11",
+      "move_to_month": 0,
+      "amount": -49.9
+    },
+    {
+      "id": 9,
+      "description": "CB Uber SA",
+      "category_id": 3,
+      "date": "2016-06-07",
+      "move_to_month": 0,
+      "amount": -16.32
+    },
+    {
+      "id": 10,
+      "description": "Prlv Sepa Navigo",
+      "category_id": 3,
+      "date": "2016-06-01",
+      "move_to_month": 0,
+      "amount": -70
+    },
+    {
+      "id": 11,
+      "description": "CB Deliveroofr",
+      "category_id": 4,
+      "date": "2016-06-23",
+      "move_to_month": 0,
+      "amount": -20.3
+    },
+    {
+      "id": 12,
+      "description": "CB East Mamma",
+      "category_id": 4,
+      "date": "2016-06-22",
+      "move_to_month": 0,
+      "amount": -20.5
+    },
+    {
+      "id": 13,
+      "description": "CB Lydia App",
+      "category_id": 4,
+      "date": "2016-06-04",
+      "move_to_month": 0,
+      "amount": -14
+    },
+    {
+      "id": 14,
+      "description": "CB Monop Paris",
+      "category_id": 4,
+      "date": "2016-06-15",
+      "move_to_month": 0,
+      "amount": -5.67
+    },
+    {
+      "id": 15,
+      "description": "CB Monop Paris",
+      "category_id": 4,
+      "date": "2016-06-09",
+      "move_to_month": 0,
+      "amount": -6.81
+    },
+    {
+      "id": 16,
+      "description": "CB Monop Paris",
+      "category_id": 4,
+      "date": "2016-06-19",
+      "move_to_month": 0,
+      "amount": -3.5
+    },
+    {
+      "id": 17,
+      "description": "CB Pizza Hut",
+      "category_id": 4,
+      "date": "2016-06-13",
+      "move_to_month": 0,
+      "amount": -25
+    },
+    {
+      "id": 18,
+      "description": "CB Burger King",
+      "category_id": 4,
+      "date": "2016-06-04",
+      "move_to_month": 0,
+      "amount": -14
+    },
+    {
+      "id": 19,
+      "description": "Frais protection Boursorama",
+      "category_id": 5,
+      "date": "2016-06-30",
+      "move_to_month": 0,
+      "amount": -2.5
+    },
+    {
+      "id": 20,
+      "description": "Frais Boursorama Change",
+      "category_id": 5,
+      "date": "2016-06-29",
+      "move_to_month": 0,
+      "amount": -20
+    },
+    {
+      "id": 21,
+      "description": "Prlv Sepa Direction Generale Finance Publique",
+      "category_id": 6,
+      "date": "2016-06-02",
+      "move_to_month": 0,
+      "amount": -317
+    },
+    {
+      "id": 22,
+      "description": "CB Amazon.ca",
+      "category_id": 7,
+      "date": "2016-06-03",
+      "move_to_month": 0,
+      "amount": -35.95
+    },
+    {
+      "id": 23,
+      "description": "Prlv Paypal Spotify",
+      "category_id": 7,
+      "date": "2016-06-05",
+      "move_to_month": 0,
+      "amount": -9.99
+    },
+    {
+      "id": 24,
+      "description": "Prlv Bouygues Telecom",
+      "category_id": 8,
+      "date": "2016-06-24",
+      "move_to_month": 0,
+      "amount": -18.4
+    },
+    {
+      "id": 25,
+      "description": "Prlv Bouygues Telecom",
+      "category_id": 8,
+      "date": "2016-06-24",
+      "move_to_month": 0,
+      "amount": -25.99
+    },
+    {
+      "id": 26,
+      "description": "CB Steam sale",
+      "category_id": 9,
+      "date": "2016-06-23",
+      "move_to_month": 0,
+      "amount": -9.99
+    },
+    {
+      "id": 27,
+      "description": "CB Steam",
+      "category_id": 9,
+      "date": "2016-06-21",
+      "move_to_month": 0,
+      "amount": -23.89
+    },
+    {
+      "id": 28,
+      "description": "CB Cabaret Sauvage",
+      "category_id": 9,
+      "date": "2016-06-17",
+      "move_to_month": 0,
+      "amount": -10
+    },
+    {
+      "id": 29,
+      "description": "Prlv Sepa Axa France",
+      "category_id": 10,
+      "date": "2016-07-01",
+      "move_to_month": -1,
+      "amount": -24.73
+    },
+    {
+      "id": 30,
+      "description": "Pharmacie rue Saint-Paul de France",
+      "category_id": 10,
+      "date": "2016-06-18",
+      "move_to_month": 0,
+      "amount": -12.93
+    }
+  ]
+}
