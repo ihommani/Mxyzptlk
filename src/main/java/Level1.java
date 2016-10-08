@@ -78,6 +78,4 @@ public class Level1 {
             System.out.println("Output available to: " + outputPath);
         }
     }
-
-
 }

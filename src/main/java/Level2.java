@@ -1,9 +1,20 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import model.BankInOutput;
+import model.BankInput;
+import model.Category;
+import transformer.BankInputToBankIn;
 import util.InputValidator;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Level2 {
 
@@ -51,7 +62,7 @@ public class Level2 {
      * ---------
      * Write the code that generates output.json from input.json
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // basic verifications
         InputValidator.validate(args);
@@ -63,6 +74,15 @@ public class Level2 {
                 .setPrettyPrinting()
                 .create();
 
-
+        Path outputPath = args.length == 2 ? Paths.get(args[1]) : Paths.get(Level1.class.getClassLoader().getResource("").getPath()).resolve("outputLevel2.json");
+        try (BufferedReader bf = Files.newBufferedReader(inputPath);
+             BufferedWriter bw = Files.newBufferedWriter(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            BankInput bankInput = gson.fromJson(bf, BankInput.class);
+            Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
+            BankInOutput src = new BankInOutput(new BankInputToBankIn().apply(categoryNameById, bankInput.getTransactions()));
+            String output = gson.toJson(src);
+            bw.write(output);
+            System.out.println("Output available to: " + outputPath);
+        }
     }
 }
