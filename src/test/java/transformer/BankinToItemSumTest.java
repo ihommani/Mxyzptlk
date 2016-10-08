@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Month;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,9 +20,9 @@ import java.util.stream.Collectors;
 /**
  * Created on 08/10/16.<br/>
  */
-public class BankInputToBankInTest {
+public class BankinToItemSumTest {
 
-    private BankInputToBankIn underTest = new BankInputToBankIn();
+    private BankinToItemSum underTest = new BankinToItemSum(Month.JUNE);
 
     private Gson gson = new GsonBuilder()
             .disableHtmlEscaping()
@@ -33,19 +34,19 @@ public class BankInputToBankInTest {
     public void should_transform_bankinput_into_bakin_data_model() throws IOException {
 
         // given
-        BufferedReader bf = Files.newBufferedReader(Paths.get(BankInputToBankIn.class.getClassLoader().getResource("transformer/input.json").getPath()));
+        BufferedReader bf = Files.newBufferedReader(Paths.get(BankinToItemSum.class.getClassLoader().getResource("transformer/input.json").getPath()));
         BankInput bankInput = gson.fromJson(bf, BankInput.class);
 
         Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
 
         // when
-        List<BankInOutput.Item> items = underTest.apply(categoryNameById, bankInput.getTransactions());
+        List<BankInOutput.SumItem> sumItems = underTest.transform(categoryNameById, bankInput.getTransactions());
 
         // then
-        Assertions.assertThat(items).hasSize(10);
-        Assertions.assertThat(items.get(0).getId()).isEqualTo(1);
-        Assertions.assertThat(items.get(0).getName()).isEqualTo("Incomes");
-        Assertions.assertThat(items.get(0).getTotal()).isEqualTo(29.0);
+        Assertions.assertThat(sumItems).hasSize(10);
+        Assertions.assertThat(sumItems.get(0).getId()).isEqualTo(1);
+        Assertions.assertThat(sumItems.get(0).getName()).isEqualTo("Incomes");
+        Assertions.assertThat(sumItems.get(0).getTotal()).isEqualTo(29.0);
 
     }
 
@@ -53,19 +54,20 @@ public class BankInputToBankInTest {
     public void should_transform_bankinput2_into_bakin_data_model() throws IOException {
 
         // given
-        BufferedReader bf = Files.newBufferedReader(Paths.get(BankInputToBankIn.class.getClassLoader().getResource("transformer/inputlevel2.json").getPath()));
+        BufferedReader bf = Files.newBufferedReader(Paths.get(BankinToItemSum.class.getClassLoader().getResource("transformer/inputlevel2.json").getPath()));
         BankInput bankInput = gson.fromJson(bf, BankInput.class);
 
         Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
 
         // when
-        List<BankInOutput.Item> items = underTest.apply(categoryNameById, bankInput.getTransactions());
+        List<BankInOutput.SumItem> sumItems = underTest.transform(categoryNameById, bankInput.getTransactions());
 
         // then
-        Assertions.assertThat(items).hasSize(10);
-        Assertions.assertThat(items.get(1).getId()).isEqualTo(2);
-        Assertions.assertThat(items.get(1).getName()).isEqualTo("Home");
-        Assertions.assertThat(items.get(1).getTotal()).isEqualTo(-1706.16);
+        Assertions.assertThat(sumItems).hasSize(10);
+        Assertions.assertThat(sumItems.get(1).getId()).isEqualTo(2);
+        Assertions.assertThat(sumItems.get(1).getName()).isEqualTo("Home");
+        Assertions.assertThat(sumItems.get(1).getTotal()).isEqualTo(-1706.16);
 
     }
+
 }
