@@ -25,5 +25,17 @@ public class BankInOutput {
             this.name = name;
             this.total = total;
         }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public double getTotal() {
+            return total;
+        }
     }
 }

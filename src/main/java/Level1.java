@@ -3,7 +3,7 @@ import com.google.gson.GsonBuilder;
 import model.BankInOutput;
 import model.BankInput;
 import model.Category;
-import model.Transaction;
+import transformer.BankInputToBankIn;
 import util.InputValidator;
 
 import java.io.BufferedReader;
@@ -13,8 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -75,23 +73,11 @@ public class Level1 {
              BufferedWriter bw = Files.newBufferedWriter(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
             BankInput bankInput = gson.fromJson(bf, BankInput.class);
             Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
-            List<BankInOutput.Item> outputItems = transformBankDatas(categoryNameById, bankInput.getTransactions());
-            String output = gson.toJson(new BankInOutput(outputItems));
+            String output = gson.toJson(new BankInOutput(new BankInputToBankIn().apply(categoryNameById, bankInput.getTransactions())));
             bw.write(output);
             System.out.println("Output available to: " + outputPath);
         }
     }
 
-    private static List<BankInOutput.Item> transformBankDatas(Map<Integer, String> categoryNameById, List<Transaction> transactions) {
-        return categoryNameById.entrySet().stream()
-                .map(entry -> {
-                    double spendingOnCategory = transactions.stream()
-                            .filter(transaction -> LocalDate.parse(transaction.getDate()).getMonth().getValue() == 6)
-                            .filter(transaction -> entry.getKey().equals(transaction.getCategory_id()))
-                            .mapToDouble(Transaction::getAmount)
-                            .sum();
-                    return new BankInOutput.Item(entry.getKey(), entry.getValue(), spendingOnCategory);
-                })
-                .collect(Collectors.toList());
-    }
+
 }
