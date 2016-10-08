@@ -1,3 +1,22 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import model.BankInOutput;
+import model.BankInput;
+import model.Category;
+import transformer.BankinToItemAverage;
+import util.InputValidator;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.Month;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class Level3 {
 
     /**
@@ -39,6 +58,27 @@ public class Level3 {
      * ---------
      * Write the code that generates output.json from input.json
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        // basic verifications
+        InputValidator.validate(args);
+
+        Path inputPath = Paths.get(args[0]);
+
+        Gson gson = new GsonBuilder()
+                .disableHtmlEscaping()
+                .setPrettyPrinting()
+                .create();
+
+        Path outputPath = args.length == 2 ? Paths.get(args[1]) : Paths.get(Level1.class.getClassLoader().getResource("").getPath()).resolve("outputLevel3.json");
+        try (BufferedReader bf = Files.newBufferedReader(inputPath);
+             BufferedWriter bw = Files.newBufferedWriter(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            BankInput bankInput = gson.fromJson(bf, BankInput.class);
+            Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
+            BankInOutput src = new BankInOutput(new BankinToItemAverage(Month.JUNE).transform(categoryNameById, bankInput.getTransactions()));
+            String output = gson.toJson(src);
+            bw.write(output);
+            System.out.println("Output available to: " + outputPath);
+        }
     }
 }

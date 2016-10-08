@@ -9,29 +9,37 @@ import java.util.List;
  */
 public class BankInOutput {
 
-    private final List<SumItem> summary;
+    private List<Item> summary;
 
-    public BankInOutput(List<SumItem> summary) {
-        this.summary = summary;
+    public BankInOutput(List<? extends Item> summary) {
+        this.summary = (List<Item>) summary;
     }
 
-    public static class SumItem {
+    public static class Item{
         private final int id;
         private final String name;
+
+        public Item(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+    }
+
+    public static class SumItem extends Item{
+
         private final double total;
 
         public SumItem(int id, String name, double total) {
-            this.id = id;
-            this.name = name;
+            super(id, name);
             this.total = total;
         }
 
         public int getId() {
-            return id;
+            return super.id;
         }
 
         public String getName() {
-            return name;
+            return super.name;
         }
 
         public double getTotal() {
@@ -39,23 +47,20 @@ public class BankInOutput {
         }
     }
 
-    public static class AverageItem {
-        private final int id;
-        private final String name;
+    public static class AverageItem extends Item{
         private final double average;
 
         public AverageItem(int id, String name, double average) {
-            this.id = id;
-            this.name = name;
+            super(id, name);
             this.average = average;
         }
 
         public int getId() {
-            return id;
+            return super.id;
         }
 
         public String getName() {
-            return name;
+            return super.name;
         }
 
         public double getAverage() {

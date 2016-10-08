@@ -52,9 +52,6 @@ public class BankinToItemAverage {
                                 .mapToDouble(Transaction::getAmount)
                                 .average()
                                 .orElse(0);
-
-                        System.out.println(averageSpendinOnCategory);
-
                         return new BankInOutput.AverageItem(entry.getKey(), entry.getValue(), averageSpendinOnCategory);
                     })
                     .collect(Collectors.toList());
