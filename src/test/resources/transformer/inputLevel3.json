@@ -1,0 +1,94 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Incomes"
+    },
+    {
+      "id": 2,
+      "name": "Home"
+    },
+    {
+      "id": 3,
+      "name": "Auto & Transport"
+    },
+    {
+      "id": 4,
+      "name": "Food & Dining"
+    },
+    {
+      "id": 5,
+      "name": "Bank"
+    },
+    {
+      "id": 6,
+      "name": "Taxes"
+    },
+    {
+      "id": 7,
+      "name": "Shopping"
+    },
+    {
+      "id": 8,
+      "name": "Bills"
+    },
+    {
+      "id": 9,
+      "name": "Entertainment"
+    },
+    {
+      "id": 10,
+      "name": "Health"
+    }
+  ],
+  "transactions":[
+    {
+      "id": 1,
+      "description": "Virement SEPA salaire juin 2016",
+      "category_id": 1,
+      "date": "2016-05-26",
+      "move_to_month": 1,
+      "amount": 2000
+    },
+    {
+      "id": 2,
+      "description": "Virement SEPA salaire mai 2016",
+      "category_id": 1,
+      "date": "2016-05-01",
+      "move_to_month": 0,
+      "amount": 2000
+    },
+    {
+      "id": 3,
+      "description": "Virement SEPA salaire avril 2016",
+      "category_id": 1,
+      "date": "2016-04-02",
+      "move_to_month": 0,
+      "amount": 2000
+    },
+    {
+      "id": 4,
+      "description": "Virement SEPA salaire mars 2016",
+      "category_id": 1,
+      "date": "2016-03-01",
+      "move_to_month": 0,
+      "amount": 1000
+    },
+    {
+      "id": 4,
+      "description": "Loyer appartement Paris",
+      "category_id": 2,
+      "date": "2016-05-03",
+      "move_to_month": 0,
+      "amount": -1534
+    },
+    {
+      "id": 5,
+      "description": "Loyer appartement Paris",
+      "category_id": 2,
+      "date": "2016-04-03",
+      "move_to_month": 0,
+      "amount": -1500
+    }
+  ]
+}
