@@ -12,4 +12,5 @@ repositories {
 dependencies {
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     testCompile group: 'org.testng', name: 'testng', version: '6.9.13.6'
+    testCompile 'org.assertj:assertj-core:3.5.2'
 }
