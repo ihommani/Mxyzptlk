@@ -12,7 +12,7 @@ public class Transaction {
     private Integer category_id;
     private String date;
     private double amount;
-
+    private int move_to_month;
 
     public Transaction() {
     }
@@ -55,5 +55,13 @@ public class Transaction {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public int getMove_to_month() {
+        return move_to_month;
+    }
+
+    public void setMove_to_month(int move_to_month) {
+        this.move_to_month = move_to_month;
     }
 }
