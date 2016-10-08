@@ -17,11 +17,11 @@ public class Level1Test {
     public static Object[][] badInput() {
         return new Object[][]{
                 {new String[]{}},
-                {new String[]{"one", "two"}}
+                {new String[]{"one", "two", "three"}}
         };
     }
 
-    @Test(dataProvider = "badInput", expectedExceptions = IllegalStateException.class, expectedExceptionsMessageRegExp = "Usage: Level1 \\[path_input.json\\]")
+    @Test(dataProvider = "badInput", expectedExceptions = IllegalStateException.class, expectedExceptionsMessageRegExp = "Usage: Level1 \\[path_input.json\\] \\[path_output_file.json\\]")
     public void should_fail_when_no_argument_is_given(String[] args) throws IOException {
 
         // given

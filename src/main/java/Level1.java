@@ -60,8 +60,8 @@ public class Level1 {
     public static void main(String[] args) throws IOException {
 
         // basic verifications
-        if (args.length < 1) {
-            throw new IllegalStateException("Usage: Level1 *[path_input.json] [path_output_file.json]");
+        if (args.length < 1 || args.length > 2) {
+            throw new IllegalStateException("Usage: Level1 [path_input.json] [path_output_file.json]");
         }
 
         Objects.requireNonNull(args[0], "The argument must be non null");
