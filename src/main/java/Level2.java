@@ -3,7 +3,7 @@ import com.google.gson.GsonBuilder;
 import model.BankInOutput;
 import model.BankInput;
 import model.Category;
-import transformer.BankInputToBankIn;
+import transformer.BankinToItemSum;
 import util.InputValidator;
 
 import java.io.BufferedReader;
@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.Month;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -79,7 +80,7 @@ public class Level2 {
              BufferedWriter bw = Files.newBufferedWriter(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
             BankInput bankInput = gson.fromJson(bf, BankInput.class);
             Map<Integer, String> categoryNameById = bankInput.getCategories().stream().collect(Collectors.toMap(Category::getId, Category::getName));
-            BankInOutput src = new BankInOutput(new BankInputToBankIn().apply(categoryNameById, bankInput.getTransactions()));
+            BankInOutput src = new BankInOutput(new BankinToItemSum(Month.JUNE).transform(categoryNameById, bankInput.getTransactions()));
             String output = gson.toJson(src);
             bw.write(output);
             System.out.println("Output available to: " + outputPath);
