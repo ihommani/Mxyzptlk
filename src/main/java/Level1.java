@@ -1,8 +1,8 @@
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import model.BankInOutput;
 import model.BankInput;
 import transformer.BankinToItemSum;
+import util.BankinGsonFactory;
 import util.InputValidator;
 
 import java.io.BufferedReader;
@@ -63,10 +63,7 @@ public class Level1 {
         Path inputPath = Paths.get(args[0]);
 
         // deserializer
-        Gson gson = new GsonBuilder()
-                .disableHtmlEscaping()
-                .setPrettyPrinting()
-                .create();
+        Gson gson = new BankinGsonFactory().getJson();
 
         Path outputPath = args.length == 2 ? Paths.get(args[1]) : Paths.get(Level1.class.getClassLoader().getResource("").getPath()).resolve("outputLevel1.json");
         try (BufferedReader bf = Files.newBufferedReader(inputPath);

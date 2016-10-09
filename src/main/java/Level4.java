@@ -1,8 +1,8 @@
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import model.BankInOutput;
 import model.BankInput;
 import transformer.BankinToItemSum;
+import util.BankinGsonFactory;
 import util.InputValidator;
 
 import java.io.BufferedReader;
@@ -71,10 +71,8 @@ public class Level4 {
 
         Path inputPath = Paths.get(args[0]);
 
-        Gson gson = new GsonBuilder()
-                .disableHtmlEscaping()
-                .setPrettyPrinting()
-                .create();
+        // deserializer
+        Gson gson = new BankinGsonFactory().getJson();
 
         try (BufferedReader bf = Files.newBufferedReader(inputPath)) {
             BankInput bankInput = gson.fromJson(bf, BankInput.class);
@@ -87,13 +85,13 @@ public class Level4 {
 
             double totalOfRemainToBeSpent = sumItems.stream()
                     .filter(sumItem -> budgetByCategoryId.containsKey(sumItem.getId()))
-                    .filter(sumItem -> budgetByCategoryId.get(sumItem.getId()).getLimit() + sumItem.getTotal() > 0) // TODO: see how to substract double. Here -- give +
-                    .peek(sumItem -> System.out.println("remain " + (budgetByCategoryId.get(sumItem.getId()).getLimit() + sumItem.getTotal()) + " to spend on category" + sumItem.getId()))
-                    .mapToDouble(sumItem -> budgetByCategoryId.get(sumItem.getId()).getLimit() - sumItem.getTotal())
+                    .filter(sumItem -> budgetByCategoryId.get(sumItem.getId()).getLimit() + sumItem.getTotal() > 0) // sumItem.getTotal() is negative
+                    .mapToDouble(sumItem -> budgetByCategoryId.get(sumItem.getId()).getLimit() + sumItem.getTotal())
                     .sum();
 
             double accountBalance = account1.getBalance() - totalOfRemainToBeSpent;
-            System.out.println("Balance of account (id=1): " + accountBalance);
+
+            System.out.println("Balance of account (id=1): " + BankinGsonFactory.bankinDecimalFormat.format(accountBalance));
         }
     }
 }
